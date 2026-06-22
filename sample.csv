@@ -1,0 +1,7 @@
+id,name,type,purpose,status
+1,sample.txt,text,Plain text sample,active
+2,sample.json,json,JSON data sample,active
+3,sample.csv,csv,Comma-separated values sample,active
+4,Dockerfile,container,Ubuntu with Python/PowerShell/.NET,pending
+5,artifact-upload.yml,workflow,GitHub Actions artifact upload,active
+6,verify-container.yml,workflow,Container version verification,pending

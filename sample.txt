@@ -1,0 +1,8 @@
+This is a sample text file for GitHub Actions artifact upload.
+Created as part of Task 1 - DevOps workflow demonstration.
+Date: 2026-06-22
+
+Features:
+- Plain text format
+- Can be versioned in Git
+- Used for artifact upload verification

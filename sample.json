@@ -1,0 +1,28 @@
+{
+  "project": "DevOps-Task-Demo",
+  "task": "Task 1 - GitHub Actions Artifact Upload",
+  "description": "Sample JSON file for artifact workflow verification",
+  "created": "2026-06-22",
+  "files": [
+    {
+      "name": "sample.txt",
+      "type": "text",
+      "purpose": "Plain text sample"
+    },
+    {
+      "name": "sample.json",
+      "type": "json",
+      "purpose": "JSON data sample"
+    },
+    {
+      "name": "sample.csv",
+      "type": "csv",
+      "purpose": "Comma-separated values sample"
+    }
+  ],
+  "workflow": {
+    "trigger": "push or manual dispatch",
+    "action": "upload-artifact",
+    "retention": "7 days"
+  }
+}
