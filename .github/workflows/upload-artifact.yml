@@ -1,0 +1,53 @@
+name: Upload Artifact
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  upload-artifact:
+    name: Create and Upload Artifact
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Verify sample files exist
+        run: |
+          if [ ! -f sample.txt ]; then
+            echo "ERROR: sample.txt not found!"
+            exit 1
+          fi
+          if [ ! -f sample.json ]; then
+            echo "ERROR: sample.json not found!"
+            exit 1
+          fi
+          if [ ! -f sample.csv ]; then
+            echo "ERROR: sample.csv not found!"
+            exit 1
+          fi
+          echo "✓ All sample files verified"
+          ls -lh sample.*
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: sample-files
+          path: |
+            sample.txt
+            sample.json
+            sample.csv
+          retention-days: 7
+
+      - name: Artifact upload summary
+        run: |
+          echo "### Artifact Upload Successful" >> $GITHUB_STEP_SUMMARY
+          echo "**Artifact Name:** sample-files" >> $GITHUB_STEP_SUMMARY
+          echo "**Files Included:**" >> $GITHUB_STEP_SUMMARY
+          echo "- sample.txt" >> $GITHUB_STEP_SUMMARY
+          echo "- sample.json" >> $GITHUB_STEP_SUMMARY
+          echo "- sample.csv" >> $GITHUB_STEP_SUMMARY
+          echo "**Retention:** 7 days" >> $GITHUB_STEP_SUMMARY
