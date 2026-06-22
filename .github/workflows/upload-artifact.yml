@@ -1,4 +1,4 @@
-name: Upload Artifact
+name: Task 1 - Upload Files as Artifact
 
 on:
   push:
@@ -8,46 +8,23 @@ on:
 
 jobs:
   upload-artifact:
-    name: Create and Upload Artifact
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Verify sample files exist
+      - name: Verify files exist
         run: |
-          if [ ! -f sample.txt ]; then
-            echo "ERROR: sample.txt not found!"
-            exit 1
-          fi
-          if [ ! -f sample.json ]; then
-            echo "ERROR: sample.json not found!"
-            exit 1
-          fi
-          if [ ! -f sample.csv ]; then
-            echo "ERROR: sample.csv not found!"
-            exit 1
-          fi
-          echo "✓ All sample files verified"
-          ls -lh sample.*
+          ls -l sample.csv sample.json sample.txt
 
-      - name: Upload artifact
+      - name: Upload files as artifact
         uses: actions/upload-artifact@v4
         with:
-          name: sample-files
+          name: sample-files-artifact
           path: |
-            sample.txt
-            sample.json
             sample.csv
+            sample.json
+            sample.txt
+          if-no-files-found: error
           retention-days: 7
-
-      - name: Artifact upload summary
-        run: |
-          echo "### Artifact Upload Successful" >> $GITHUB_STEP_SUMMARY
-          echo "**Artifact Name:** sample-files" >> $GITHUB_STEP_SUMMARY
-          echo "**Files Included:**" >> $GITHUB_STEP_SUMMARY
-          echo "- sample.txt" >> $GITHUB_STEP_SUMMARY
-          echo "- sample.json" >> $GITHUB_STEP_SUMMARY
-          echo "- sample.csv" >> $GITHUB_STEP_SUMMARY
-          echo "**Retention:** 7 days" >> $GITHUB_STEP_SUMMARY
